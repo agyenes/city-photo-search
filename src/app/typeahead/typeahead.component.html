@@ -4,6 +4,7 @@
       <input 
         type="text" 
         class="search" 
+        (keyup)="findMatches()" 
         placeholder="search for a city"
         #nameInput
       >

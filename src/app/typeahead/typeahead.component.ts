@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { CitiesService } from '../cities.service';
 
 @Component({
@@ -7,7 +7,11 @@ import { CitiesService } from '../cities.service';
   styleUrls: ['./typeahead.component.scss']
 })
 export class TypeaheadComponent implements OnInit {
+  @ViewChild('nameInput') nameInputRef: ElementRef;
+
   cities: any;
+  filteredCities: [];
+  wordToMatch: string;
 
   constructor(private citiesService: CitiesService) { }
 
@@ -18,7 +22,12 @@ export class TypeaheadComponent implements OnInit {
   }
 
   findMatches() {
-
+    let wordToMatch = this.nameInputRef.nativeElement.value;
+    
+    this.filteredCities = this.cities.filter(item => {
+      let cityName = item.city.toLowerCase();
+      return cityName.startsWith(wordToMatch);
+    });
   }
 
 }
