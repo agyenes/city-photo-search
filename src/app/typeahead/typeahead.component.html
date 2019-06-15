@@ -1,10 +1,23 @@
 <div class="row">
   <div class="col-xs-12">
     <form class="search-form">
-      <input type="text" class="search" placeholder="search for a city">
-      <ul class="suggestions">
-        <li>Filter for a city</li>
-      </ul>
+      <input 
+        type="text" 
+        class="search" 
+        placeholder="search for a city"
+        #nameInput
+      >
     </form>
+    <div class="row">
+      <div class="col-xs-12">
+        <ul class="list-group suggestions">
+          <li           
+            class="list-group-item"
+            *ngFor="let city of filteredCities">
+            {{city.city}} - {{city.state}}
+          </li>
+        </ul>
+      </div>
+    </div> 
   </div>  
 </div>

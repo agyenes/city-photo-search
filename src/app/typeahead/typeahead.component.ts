@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CitiesService } from '../cities.service';
 
 @Component({
   selector: 'app-typeahead',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TypeaheadComponent implements OnInit {
 
-  constructor() { }
+  constructor(private citiesService: CitiesService) { }
 
-  ngOnInit() {
+  ngOnInit() {    
+
+  }
+
+  findMatches() {
+
   }
 
 }
+
