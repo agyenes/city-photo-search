@@ -3,10 +3,12 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { TypeaheadComponent } from './typeahead/typeahead.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    TypeaheadComponent
   ],
   imports: [
     BrowserModule,
