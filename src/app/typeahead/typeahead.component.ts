@@ -7,11 +7,14 @@ import { CitiesService } from '../cities.service';
   styleUrls: ['./typeahead.component.scss']
 })
 export class TypeaheadComponent implements OnInit {
+  cities: any;
 
   constructor(private citiesService: CitiesService) { }
 
   ngOnInit() {    
-
+    this.cities = this.citiesService.getCities().subscribe(responseData => {
+      this.cities = responseData;
+    });
   }
 
   findMatches() {
