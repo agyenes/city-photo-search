@@ -14,9 +14,4 @@ export class CitiesService {
     return this.http
     .get(this.endpoint)
   }
-
-  openImageSearch(name) {
-    window.open('https://www.google.com/search?tbm=isch&q=' + name, '_blank');
-  }
-
 }  

@@ -10,15 +10,16 @@
       >
     </form>
     <div class="row">
-      <div class="col-xs-12">
-        <ul class="list-group suggestions">
-          <li           
-            class="list-group-item"
-            *ngFor="let city of filteredCities">
-            {{city.city}} - {{city.state}}
-          </li>
-        </ul>
-      </div>
-    </div> 
+        <div class="col-xs-12">
+          <ul class="list-group suggestions">
+            <li           
+              class="list-group-item"
+              (click)="openImageSearch(city.city)"
+              *ngFor="let city of filteredCities">
+              {{city.city}} - {{city.state}}
+            </li>
+          </ul>
+        </div>
+      </div> 
   </div>  
 </div>
