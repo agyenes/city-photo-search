@@ -7,8 +7,6 @@ import { HttpClient } from '@angular/common/http';
 export class CitiesService {
   constructor(private http: HttpClient) { }
 
-  private cities: any
-
   getCities(wordToMatch) {
     let url = 'http://localhost:3000/citysearch/?name=' + wordToMatch;
     return this.http
