@@ -1,13 +1,14 @@
 <div class="wrapper">
   <div class="row">
     <div class="col-xs-12">
-      <form class="search-form">
+      <form class="search-form" (keydown.enter)="$event.preventDefault()">
         <input 
           type="text" 
           class="search" 
           (keyup)="findMatches()" 
           placeholder="type any city..."
-          #nameInput
+          [(ngModel)]=nameInput
+          [ngModelOptions]="{standalone: true}"
         >      
         <button
           class="btn"
@@ -16,20 +17,24 @@
         >
           Search Images
         </button>
-        <p [hidden]="!selectedCity" class="description">Selected city: {{selectedCity}}</p>
       </form>
-    </div> 
-    <div class="row">
-      <div class="col-xs-12">
-        <ul class="list-group suggestions">
-          <li           
-            class="list-group-item"
-            (click)="resetList(city.name)"  
-            *ngFor="let city of cities">
-            {{city.name}} - {{city.country}}
-          </li>
-        </ul>
+      <div class="status">
+        <p [hidden]="!selectedCity" class="description">Selected city: {{selectedCity}}</p>
+        <a [hidden]="!selectedCity" class="clear" (click)="clearSelectedCity()">clear selected city</a>
       </div>
     </div> 
-  </div>
+  </div>  
+  <div class="row">
+    <div class="col-xs-12">   
+      <ul class="list-group suggestions">
+        <li           
+          class="list-group-item"
+          (click)="selectCity(city.name)"  
+          *ngFor="let city of cities">
+          {{city.name}} - {{city.country}}
+        </li>
+      </ul>
+      <p [hidden]="nameInput === '' || cities.length !== 0" class="noMatch">Sorry, no matches!</p>
+    </div>
+  </div> 
 </div>  

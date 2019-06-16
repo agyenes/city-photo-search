@@ -1,4 +1,4 @@
-import { Injectable, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
@@ -10,6 +10,6 @@ export class CitiesService {
   getCities(wordToMatch) {
     let url = 'http://localhost:3000/citysearch/?name=' + wordToMatch;
     return this.http
-    .get(url)
+      .get(url)
   }
 }  
