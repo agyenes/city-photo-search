@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 import { CitiesService } from '../cities.service';
 
 @Component({
@@ -6,15 +6,20 @@ import { CitiesService } from '../cities.service';
   templateUrl: './typeahead.component.html',
   styleUrls: ['./typeahead.component.scss']
 })
-export class TypeaheadComponent implements OnInit {
+export class TypeaheadComponent {
   @ViewChild('nameInput') nameInputRef: ElementRef;
 
   cities: any = [];
   wordToMatch: string;
+  selectedCity: string = '';
 
   constructor(private citiesService: CitiesService) { }
 
-  ngOnInit() {}
+  resetList(name) {
+    this.selectedCity = name;
+    this.cities.length = 0;
+    this.nameInputRef.nativeElement.value = '';
+  }
 
   findMatches() {
     let wordToMatch = this.nameInputRef.nativeElement.value;
