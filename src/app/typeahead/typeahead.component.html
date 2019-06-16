@@ -14,9 +14,9 @@
           <ul class="list-group suggestions">
             <li           
               class="list-group-item"
-              (click)="openImageSearch(city.city)"
-              *ngFor="let city of filteredCities">
-              {{city.city}} - {{city.state}}
+              (click)="openImageSearch(city.name)"
+              *ngFor="let city of cities">
+              {{city.name}} - {{city.country}}
             </li>
           </ul>
         </div>

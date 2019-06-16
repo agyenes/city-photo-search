@@ -9,25 +9,19 @@ import { CitiesService } from '../cities.service';
 export class TypeaheadComponent implements OnInit {
   @ViewChild('nameInput') nameInputRef: ElementRef;
 
-  cities: any;
-  filteredCities: [];
+  cities: any = [];
   wordToMatch: string;
 
   constructor(private citiesService: CitiesService) { }
 
-  ngOnInit() {    
-    this.cities = this.citiesService.getCities().subscribe(responseData => {
-      this.cities = responseData;
-    });
-  }
+  ngOnInit() {}
 
   findMatches() {
     let wordToMatch = this.nameInputRef.nativeElement.value;
     
-    this.filteredCities = this.cities.filter(item => {
-      let cityName = item.city.toLowerCase();
-      return cityName.startsWith(wordToMatch);
-    });
+    this.citiesService.getCities(wordToMatch).subscribe(responseData => {
+      this.cities = responseData;
+    });    
   }
 
   openImageSearch(name) {
