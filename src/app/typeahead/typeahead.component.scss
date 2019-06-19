@@ -1,3 +1,8 @@
+$white: #fff;
+$gray: #cfcfcf;
+$lightGreen: #c9ee00;
+$red: red;
+
 .wrapper {
   padding: 2em 1em;
   .search-form {
@@ -10,14 +15,13 @@
     }
 
     // search form
-
     input.search {
       flex-basis: 50%;
-      padding: 0.5em;  
+      padding: 0.25em;  
       text-align: center;
-      border: 5px solid #c9ee00;
+      border: 5px solid $lightGreen;
       border-radius: 5px;
-      font-size: 32px;
+      font-size: 28px;
       box-shadow: 0 0 5px rgba(0, 0, 0, 0.12), inset 0 0 2px rgba(0, 0, 0, 0.19);
       @media (max-width: 991px) {
         font-size: 24px;
@@ -29,18 +33,17 @@
     }
     
     // button
-
     .btn {
       flex-basis: 30%;
       max-width: 250px;
       color: #000;
-      background-color: #fff;
-      border-color: #c9ee00;
+      background-color: $white;
+      border-color: $lightGreen;
       transition: all .25s;
       display: inline-block;
-      margin-top: 1em;
+      margin-top: 0.5em;
       margin-left: 2em;
-      margin-bottom: 1em;
+      margin-bottom: 0.5em;
       padding: 0.5em 1em;
       font-size: 24px;
       border-style: solid;
@@ -50,7 +53,7 @@
       border-radius: 6px;
       &.disable {
         pointer-events: none;
-        color: gray;
+        color: $gray;
       }
       &:before {
         position: absolute;
@@ -58,7 +61,7 @@
         top: -12.5%;
         width: 75%;
         height: 125%;
-        background-color: #c9ee00;
+        background-color: $lightGreen;
         border-radius: 6px;
         content: '';
         z-index: -1;
@@ -82,31 +85,38 @@
   }  
 
   // status texts
-
   .status {
-    min-height: 4em;
     flex-basis: 100%;
     .description {
       margin-top: 1em;
-      color: white;
+      color: $white;
       font-size: 24px;
+      strong {
+        color: $lightGreen;
+      }
     }
     .clear {
       font-style: italic;
       cursor: pointer;
+      color: $gray;
+      transition: all 0.3s;
       &:hover {
         text-decoration: underline
       }
     }
+    .error {
+      margin-top: 1em;
+      color: $red;
+    }
   }
 
   // image
-
   .imageWrapper {
     padding: 4em;
     img {
       object-fit: cover;
       width: 100%;
+      max-width: 1200px;
       @media (max-width: 480px) {
         display: none;
       }
@@ -114,18 +124,17 @@
   }
 
   // result list
-
   .suggestions {
     margin-top: 2em;
     padding: 0;
     position: relative;
     li {
-      background: white;
+      background: $white;
       list-style: none;
-      border-bottom: 1px solid #D8D8D8;
+      border-bottom: 1px solid $gray;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.14);
-      margin: 1em 25%;
-      padding: 0.5em 1em;
+      margin: 0.5em 25%;
+      padding: 0.25em 1em;
       cursor: pointer;
       transition: all 0.2s;      
       display: flex;
@@ -140,9 +149,56 @@
       }
     }
   }
-
+  select.suggestions  {
+    padding: 0.5em;
+    width: 50%;
+  }
   .noMatch {
-    color: white;
-    font-size: 36px;
+    color: $white;
+    font-size: 20px;
   }
 }  
+
+// switch
+.switch-wrapper {
+  display: flex;
+  position: absolute;
+  top: 2em;
+  right: 2em;
+  p {
+    color: $white;
+    margin: auto 1em;
+    font-size: 18px;
+  }
+}
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 24px;
+  height: 24px; 
+  margin-bottom: 0;
+  .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+}  
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: $white;
+}
+input:checked + .slider {
+  background-color: $lightGreen;
+}
+input:focus + .slider {
+  box-shadow: 0 0 1px $lightGreen;
+}
+.slider.round {
+  border-radius: 24px;
+  border: 4px solid $white
+}

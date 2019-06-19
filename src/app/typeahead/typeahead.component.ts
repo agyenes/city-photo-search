@@ -11,6 +11,7 @@ export class TypeaheadComponent {
   wordToMatch: string;
   selectedCity: string = '';
   nameInput: string = '';
+  error: boolean = false;
 
   constructor(private citiesService: CitiesService) { }
 
@@ -19,13 +20,13 @@ export class TypeaheadComponent {
     this.nameInput = '';
   }
 
-  selectCity(item) {
-    this.selectedCity = item;
+  clearSelectedCity() {
+    this.selectedCity = '';
     this.resetForm();
   }
 
-  clearSelectedCity() {
-    this.selectedCity = '';
+  selectCity(item) {
+    this.selectedCity = item;
   }
 
   findMatches() {
@@ -34,9 +35,14 @@ export class TypeaheadComponent {
     if (wordToMatch === '') {
       this.cities = [];
     } else {
-      this.citiesService.getCities(wordToMatch).subscribe(responseData => {
-        this.cities = responseData;
-      });    
+      this.citiesService.getCities(wordToMatch).subscribe(
+        responseData => {
+          this.cities = responseData;
+        },
+        err => {
+          console.log(err);
+          this.error = true;
+        })  
     }
   }
 

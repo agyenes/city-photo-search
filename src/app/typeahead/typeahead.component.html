@@ -1,4 +1,11 @@
 <div class="wrapper">
+  <div class="switch-wrapper">
+    <p>Switch to dropdown mode</p>
+    <label class="switch">      
+      <input type="checkbox" (change)="isDropdown=!isDropdown">
+      <span class="slider round"></span>
+    </label>
+  </div>  
   <div class="row">
     <div class="col-xs-12">
       <form class="search-form" (keydown.enter)="$event.preventDefault()">
@@ -8,7 +15,7 @@
           (keyup)="findMatches()" 
           placeholder="type any city..."
           [(ngModel)]=nameInput
-          [ngModelOptions]="{standalone: true}"
+          name="first"
         >      
         <button
           class="btn"
@@ -19,8 +26,9 @@
         </button>
       </form>
       <div class="status">
-        <p [hidden]="!selectedCity" class="description">Selected city: {{selectedCity}}</p>
+        <p [hidden]="!selectedCity" class="description">Selected city: <strong>{{selectedCity}}</strong></p>
         <a [hidden]="!selectedCity" class="clear" (click)="clearSelectedCity()">clear selected city</a>
+        <p [hidden]="!error" class="error">Something went wrong, please try again!</p>
       </div>
     </div> 
   </div>  
@@ -29,14 +37,25 @@
       <div class="imageWrapper" [hidden]="nameInput !== ''">
           <img src="../assets/hk.jpg"/>
       </div>    
-      <ul class="list-group suggestions">
+      <ul 
+        class="list-group suggestions" 
+        [hidden] = "isDropdown"
+      >
         <li           
           class="list-group-item"
           (click)="selectCity(city.name)"  
-          *ngFor="let city of cities">
-          {{city.name}} - {{city.country}}
+          *ngFor="let city of cities; let i = index">
+          {{i + 1}}. {{city.name}} - {{city.country}}
         </li>
       </ul>
+      <select 
+        [hidden] = "!isDropdown || nameInput === ''"
+        class="suggestions" 
+        [(ngModel)] ="city"
+        (change)="selectCity(city)"
+      >
+        <option *ngFor="let city of cities; let i = index" [ngValue]="city.name">{{i + 1}}. {{city.name}} - {{city.country}}</option>
+      </select>
       <p [hidden]="nameInput === '' || cities.length !== 0" class="noMatch">Sorry, no matches!</p>
     </div>
   </div> 
