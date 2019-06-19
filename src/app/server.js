@@ -4,13 +4,9 @@ const express = require('express');
 const app = express();
 const port = 3000;
 const cities = require('../../node_modules/cities.json/cities.json');
+const finder = require('./finder');
 
-function findMatches(wordToMatch) {
-    return cities.filter(item => {
-        let cityName = item.name.toLowerCase();
-        return cityName.startsWith(wordToMatch);
-    }).slice(0,10);
-}
+const myFinder = finder();
 
 app.use((req, res, next) => {
     res.append('Access-Control-Allow-Origin', ['*']);
@@ -19,6 +15,6 @@ app.use((req, res, next) => {
     next();
 });
 
-app.get('/citysearch/', (req, res) => res.send(findMatches(req.query.name)));
+app.get('/citysearch/', (req, res) => res.send(myFinder.findMatches(req.query.name, cities)));
 
 app.listen(port);
