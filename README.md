@@ -1,1 +1,1 @@
-Filter for cities and search for images on the results!
+Filter for cities and search for images of the results!
