@@ -40,7 +40,7 @@ export class TypeaheadComponent {
           this.cities = responseData;
         },
         err => {
-          console.log(err);
+          console.log(err.message);
           this.error = true;
         })  
     }
